@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { shuffle } from "lodash";
 import SudokuGrid from "../SudokuGrid";
+import SudokuForm from "../SudokuForm";
 
 export default function SudokuGenerator() {
   const [puzzle, setPuzzle] = useState(null);
@@ -67,12 +68,17 @@ export default function SudokuGenerator() {
         puzzle[x][y] = null;
     }
   }
+  function checkSolution(solution) {
+    console.log("solution:", solution);
+    // code to check the solution
+  }
 
   return (
     <div>
       <button onClick={generatePuzzle}>Generate Puzzle</button>
       {puzzle && <div>{puzzle}</div>}
       {puzzle ? <SudokuGrid puzzle={puzzle} /> : ""}
+      {/* {puzzle ? <SudokuForm puzzle={puzzle} onSubmit={checkSolution} /> : ""} */}
       {/* <SudokuGrid puzzle={puzzle}/> */}
     </div>
   );
