@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { shuffle } from "lodash";
 import SudokuGrid from "../SudokuGrid";
 
+import "./style.css";
+
+
 export default function SudokuGenerator() {
   const [puzzle, setPuzzle] = useState(null);
 
@@ -62,7 +65,7 @@ export default function SudokuGenerator() {
     setPuzzle(puzzle);
     console.log(puzzle);
     // remove some of the numbers to create the final puzzle.You can change the number of blank spaces by adjusting the number of iterations in the following line.
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 50; i++) {
         const x = Math.floor(Math.random() * 9);
         const y = Math.floor(Math.random() * 9);
         puzzle[x][y] = null;
@@ -75,7 +78,7 @@ export default function SudokuGenerator() {
 
   return (
     <div>
-      <button onClick={generatePuzzle}>Generate Puzzle</button>
+      <button className="generateButton" onClick={generatePuzzle}>Generate Puzzle</button>
       {/* {puzzle && <div>{puzzle}</div>} */}
       {puzzle ? <SudokuGrid puzzle={puzzle} /> : ""}
     </div>
