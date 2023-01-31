@@ -16,22 +16,24 @@
   height: 9vw;
   max-height: 8vh;
   max-width: 8vh;
-  text-align: center;
-  line-height: 9vw;
-  /* font-size: 30px; */
   font-size: larger;
   font-weight: bold;
   background-color: #ddd;
   border: 1px solid black;
   border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .cellinput {
   background-color: #ddd;
   display: block;
   margin: auto;
-
   width: 8vw;
   height: 8vw;
+  max-height: 7vh;
+  max-width: 7vh;
   border: none;
 }
 .changed {
