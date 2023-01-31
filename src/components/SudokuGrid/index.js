@@ -11,7 +11,7 @@ export default function SudokuGrid({ puzzle }) {
   const handleCellChange = (e, rowIndex, columnIndex) => {
     const newValue = e.target.value.charAt(0);
     // Here handle if text is not an acceptable number
-// newValue.match(/^[0-9]*$/)
+    // newValue.match(/^[0-9]*$/)
 
     if (newValue.match(/[0-9]/)) {
       setGrid((prevGrid) =>
@@ -32,9 +32,7 @@ export default function SudokuGrid({ puzzle }) {
             : row
         )
       );
-    }
-    else {
-
+    } else {
       setGrid((prevGrid) =>
         prevGrid.map((row, i) =>
           i === rowIndex
@@ -55,25 +53,30 @@ export default function SudokuGrid({ puzzle }) {
       );
     }
   };
-
+  const handleClick = () => {
+    window.print();
+  };
   return (
-    <div className="grid-container">
-      {grid.map((row, rowIndex) =>
-        row.map((value, columnIndex) => (
-          <div key={`${rowIndex}-${columnIndex}`} className="grid-cell">
-            {value === null ? (
-              <input
-                value={value}
-                className="cellinput"
-                type="text"
-                onChange={(e) => handleCellChange(e, rowIndex, columnIndex)}
-              />
-            ) : (
-              value
-            )}
-          </div>
-        ))
-      )}
-    </div>
+    <>
+      <div className="grid-container">
+        {grid.map((row, rowIndex) =>
+          row.map((value, columnIndex) => (
+            <div key={`${rowIndex}-${columnIndex}`} className="grid-cell">
+              {value === null ? (
+                <input
+                  value={value}
+                  className="cellinput"
+                  type="text"
+                  onChange={(e) => handleCellChange(e, rowIndex, columnIndex)}
+                />
+              ) : (
+                value
+              )}
+            </div>
+          ))
+        )}
+      </div>
+      <button className="button"  onClick={handleClick}>Print Sudoku</button>
+    </>
   );
 }
