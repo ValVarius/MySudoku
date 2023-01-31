@@ -4,7 +4,6 @@ import SudokuGrid from "../SudokuGrid";
 
 import "./style.css";
 
-
 export default function SudokuGenerator() {
   const [puzzle, setPuzzle] = useState(null);
 
@@ -60,15 +59,15 @@ export default function SudokuGenerator() {
       }
       return true;
     }
+    console.log(puzzle);
 
     solve(puzzle);
     setPuzzle(puzzle);
-    console.log(puzzle);
     // remove some of the numbers to create the final puzzle.You can change the number of blank spaces by adjusting the number of iterations in the following line.
-    for (let i = 0; i < 50; i++) {
-        const x = Math.floor(Math.random() * 9);
-        const y = Math.floor(Math.random() * 9);
-        puzzle[x][y] = null;
+    for (let i = 0; i < 150; i++) {
+      const x = Math.floor(Math.random() * 9);
+      const y = Math.floor(Math.random() * 9);
+      puzzle[x][y] = null;
     }
   }
   function checkSolution(solution) {
@@ -76,9 +75,12 @@ export default function SudokuGenerator() {
     // code to check the solution
   }
 
+
   return (
     <div>
-      <button className="generateButton" onClick={generatePuzzle}>Generate Puzzle</button>
+      <button className="button" onClick={generatePuzzle}>
+        Generate Puzzle
+      </button>
       {/* {puzzle && <div>{puzzle}</div>} */}
       {puzzle ? <SudokuGrid puzzle={puzzle} /> : ""}
     </div>
