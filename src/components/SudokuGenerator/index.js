@@ -59,12 +59,11 @@ export default function SudokuGenerator() {
       }
       return true;
     }
-    console.log(puzzle);
 
     solve(puzzle);
     setPuzzle(puzzle);
     // remove some of the numbers to create the final puzzle.You can change the number of blank spaces by adjusting the number of iterations in the following line.
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < 50; i++) {
       const x = Math.floor(Math.random() * 9);
       const y = Math.floor(Math.random() * 9);
       puzzle[x][y] = null;
