@@ -28,18 +28,15 @@
 
 .cellinput {
   background-color: #ddd;
-  display: block;
-  margin: auto;
   width: 8vw;
   height: 8vw;
-  max-height: 7vh;
-  max-width: 7vh;
+  max-height: 6vh;
+  max-width: 6vh;
   border: none;
 }
 .changed {
-  margin-top: 5px;
   color: blue;
-  font-size: larger;
+  font-size: large;
   font-weight: bold;
   text-align: center;
 }
