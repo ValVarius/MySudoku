@@ -56,6 +56,10 @@ export default function SudokuGrid({ puzzle }) {
   const handleClick = () => {
     window.print();
   };
+  const checkSolution=() => {
+    console.log("solution:", puzzle);
+    // code to check the solution
+  }
   return (
     <>
       <div className="grid-container" id="grid">
@@ -77,6 +81,7 @@ export default function SudokuGrid({ puzzle }) {
         )}
       </div>
       <button className="button"  onClick={handleClick}>Print Sudoku</button>
+      <button className="button"  onClick={checkSolution}>Verify Sudoku</button>
     </>
   );
 }
