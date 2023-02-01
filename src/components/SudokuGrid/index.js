@@ -5,8 +5,10 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
   const [grid, setGrid] = useState([]);
   const [userSoulution, setUserSoulution] = useState([]);
   const [color, setColor] = useState("red");
+  const [solved, setSolved] = useState(false);
 
   useEffect(() => {
+    setSolved(false);
     setGrid(puzzle);
     setUserSoulution(puzzle);
     if (difficulty == 35) {
@@ -45,6 +47,7 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
                     value={newValue}
                     className="cellinput changed"
                     type="text"
+                    style={{ backgroundColor: color }}
                     onChange={(e) => handleCellChange(e, rowIndex, columnIndex)}
                   />
                 ) : (
@@ -64,6 +67,7 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
                     value={newValue}
                     className="cellinput changed wrong"
                     type="text"
+                    style={{ backgroundColor: color }}
                     onChange={(e) => handleCellChange(e, rowIndex, columnIndex)}
                   />
                 ) : (
@@ -99,8 +103,12 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
 
       return true;
     };
-    console.log(userSoulution);
-    console.log(arraysAreEqual(solution, puzzle));
+    // console.log(userSoulution);
+    // console.log(arraysAreEqual(solution, puzzle));
+    if (arraysAreEqual(solution, puzzle)) {
+      setGrid(solution);
+      setSolved(true);
+    }
   };
   return (
     <>
@@ -110,7 +118,7 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
             <div key={`${rowIndex}-${columnIndex}`} className="grid-cell">
               {value === null ? (
                 <input
-                  value={value}
+                  value=""
                   className="cellinput"
                   type="text"
                   style={{ backgroundColor: color }}
@@ -123,6 +131,14 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
           ))
         )}
       </div>
+      {solved ? (
+        <div className="success" style={{ backgroundColor: color }}>
+          Congratulations!
+        </div>
+      ) : (
+        ""
+      )}
+
       <div className="topbottombuttons">
         <button className="button" id="print" onClick={handleClick}>
           Print Sudoku

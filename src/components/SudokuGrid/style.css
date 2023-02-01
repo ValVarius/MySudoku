@@ -42,13 +42,6 @@
 }
 
 .cellinput {
-  /* background-color: #ddd;
-  background-color: rgb(203, 242, 222);
-  background-color: rgb(189, 226, 180);
-  background-color: rgb(230, 242, 203);
-  background-color: rgb(239, 233, 172);
-  background-color: rgb(237, 189, 179); */
-
   width: 7vw;
   height: 7vw;
   max-height: 5vh;
@@ -63,6 +56,15 @@
 }
 .wrong {
   color: red;
+}
+.success{
+  display: flex;
+  justify-content: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bolder;
+  max-width: 90%;
+  margin: auto;
+  border-radius: 20px;
 }
 /* #print{
   margin-left: 10vw;
