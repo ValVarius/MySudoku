@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 
 export default function SudokuGrid({ puzzle, difficulty, solution }) {
-  const [grid, setGrid] = useState(puzzle);
-  const [userSoulution, setUserSoulution] = useState(puzzle);
+  const [grid, setGrid] = useState([]);
+  const [userSoulution, setUserSoulution] = useState([]);
   const [color, setColor] = useState("red");
 
   useEffect(() => {
     setGrid(puzzle);
+    setUserSoulution(puzzle);
     if (difficulty == 35) {
       setColor("rgb(203, 242, 222)");
     } else if (difficulty == 40) {
@@ -27,6 +28,14 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
     // newValue.match(/^[0-9]*$/)
 
     if (newValue.match(/[0-9]/)) {
+      const newArray = [...userSoulution];
+
+      // Modify the newArray as desired
+      newArray[rowIndex][columnIndex] = parseInt(newValue);
+
+      // Call setTwoDArray with the updated array
+      setUserSoulution(newArray);
+
       setGrid((prevGrid) =>
         prevGrid.map((row, i) =>
           i === rowIndex
@@ -45,7 +54,6 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
             : row
         )
       );
-     
     } else {
       setGrid((prevGrid) =>
         prevGrid.map((row, i) =>
@@ -91,7 +99,7 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
 
       return true;
     };
-    console.log(grid);
+    console.log(userSoulution);
     console.log(arraysAreEqual(solution, puzzle));
   };
   return (
