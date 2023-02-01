@@ -6,6 +6,8 @@ import "./style.css";
 
 export default function SudokuGenerator() {
   const [puzzle, setPuzzle] = useState(null);
+  const [solution, setSoulution] = useState(null);
+  const [difficulty, setDifficulty] = useState(35);
 
   function generatePuzzle() {
     const puzzle = Array(9)
@@ -65,7 +67,7 @@ export default function SudokuGenerator() {
       let boxes = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
       let emptyCells = [];
       let solutions = [];
-    
+
       for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
           if (grid[i][j] === null) {
@@ -77,7 +79,7 @@ export default function SudokuGenerator() {
           }
         }
       }
-    
+
       function backtrack(index) {
         if (index === emptyCells.length) {
           solutions.push(grid.map((row) => row.slice()));
@@ -95,7 +97,7 @@ export default function SudokuGenerator() {
           }
         }
       }
-    
+
       backtrack(0);
       return solutions;
     }
@@ -104,17 +106,10 @@ export default function SudokuGenerator() {
       while (n > 0) {
         const row = Math.floor(Math.random() * 9);
         const col = Math.floor(Math.random() * 9);
-
         if (unsolved[row][col] === null) continue;
-
         const temp = unsolved[row][col];
-
         unsolved[row][col] = null;
-        console.log(solveSudoku(unsolved).length);
-
         if (solveSudoku(unsolved).length > 1) {
-          console.log(solveSudoku(unsolved).length);
-          console.log("not unique");
           unsolved[row][col] = temp;
           continue;
         }
@@ -126,17 +121,53 @@ export default function SudokuGenerator() {
 
     solve(puzzle);
     setPuzzle(puzzle);
+    setSoulution(solveSudoku(puzzle)[0]);
     // 55 seems to be the current limit for a decent timing
-    removeCells(puzzle, 55);
-    console.log(puzzle);
+    removeCells(puzzle, difficulty);
+    // console.log(puzzle);
   }
+  const handleChange = (event) => {
+    setDifficulty(event.target.value);
 
+    // generatePuzzle(event.target.value);
+  };
   return (
     <div>
-      <button className="button" onClick={generatePuzzle}>
-        Generate Puzzle
-      </button>
-      {puzzle ? <SudokuGrid puzzle={puzzle} /> : ""}
+      <div className="topbottombuttons">
+        <select className="button" id="level-select" onChange={handleChange}>
+          <option selected hidden>
+            Select Difficulty
+          </option>
+          <option value="35" id="Easy">
+            Easy
+          </option>
+          <option value="40" id="Moderate">
+            Moderate
+          </option>
+          <option value="45" id="Average">
+            Average
+          </option>
+          <option value="50" id="Advanced">
+            Advanced
+          </option>
+          <option value="55" id="Master">
+            Master
+          </option>
+        </select>
+
+        <button className="button" id="generate" onClick={generatePuzzle}>
+          Generate New Puzzle
+        </button>
+      </div>
+      {puzzle ? (
+        <SudokuGrid
+          puzzle={puzzle}
+          difficulty={difficulty}
+          solution={solution}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

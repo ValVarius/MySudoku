@@ -1,0 +1,27 @@
+.topbottombuttons {
+  display: flex;
+}
+#level-select {
+  background-color: #ddd;
+  color: black;
+  /* margin-left: 10vw; */
+}
+/* #generate{
+    margin-right: 10vw;
+
+} */
+#Easy{
+    background-color: rgb(203, 242, 222);
+}
+#Moderate{
+    background-color: rgb(169, 215, 228);
+}
+#Average{
+    background-color: rgb(230, 242, 203);
+}
+#Advanced{
+    background-color: rgb(239, 233, 172);
+}
+#Master{
+    background-color: rgb(237, 189, 179);
+}

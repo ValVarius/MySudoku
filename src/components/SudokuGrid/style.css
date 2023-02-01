@@ -7,15 +7,15 @@
   height: 90vw;
   margin: auto;
 
-  max-height: 80vh;
-  max-width: 80vh;
+  max-height: 70vh;
+  max-width: 70vh;
 }
 
 .grid-cell {
-  width: 9vw;
-  height: 9vw;
-  max-height: 8vh;
-  max-width: 8vh;
+  width: 8vw;
+  height: 8vw;
+  max-height: 7vh;
+  max-width: 7vh;
   font-size: larger;
   font-weight: bold;
   background-color: #ddd;
@@ -25,13 +25,34 @@
   justify-content: center;
   align-items: center;
 }
+#Easy{
+  background-color: rgb(203, 242, 222);
+}
+#Moderate{
+  background-color: rgb(189, 226, 180);
+}
+#Average{
+  background-color: rgb(230, 242, 203);
+}
+#Advanced{
+  background-color: rgb(239, 233, 172);
+}
+#Master{
+  background-color: rgb(237, 189, 179);
+}
 
 .cellinput {
-  background-color: #ddd;
-  width: 8vw;
-  height: 8vw;
-  max-height: 6vh;
-  max-width: 6vh;
+  /* background-color: #ddd;
+  background-color: rgb(203, 242, 222);
+  background-color: rgb(189, 226, 180);
+  background-color: rgb(230, 242, 203);
+  background-color: rgb(239, 233, 172);
+  background-color: rgb(237, 189, 179); */
+
+  width: 7vw;
+  height: 7vw;
+  max-height: 5vh;
+  max-width: 5vh;
   border: none;
 }
 .changed {
@@ -43,3 +64,9 @@
 .wrong {
   color: red;
 }
+/* #print{
+  margin-left: 10vw;
+}
+#verify{
+  margin-right: 10vw;
+} */
