@@ -59,28 +59,83 @@ export default function SudokuGenerator() {
       }
       return true;
     }
+    function solveSudoku(grid) {
+      let rows = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
+      let columns = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
+      let boxes = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
+      let emptyCells = [];
+      let solutions = [];
+    
+      for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+          if (grid[i][j] === null) {
+            emptyCells.push([i, j]);
+          } else {
+            let boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+            let num = grid[i][j];
+            rows[i][num] = columns[j][num] = boxes[boxIndex][num] = true;
+          }
+        }
+      }
+    
+      function backtrack(index) {
+        if (index === emptyCells.length) {
+          solutions.push(grid.map((row) => row.slice()));
+          return;
+        }
+        let [row, col] = emptyCells[index];
+        let boxIndex = Math.floor(row / 3) * 3 + Math.floor(col / 3);
+        for (let num = 1; num <= 9; num++) {
+          if (!rows[row][num] && !columns[col][num] && !boxes[boxIndex][num]) {
+            grid[row][col] = num.toString();
+            rows[row][num] = columns[col][num] = boxes[boxIndex][num] = true;
+            backtrack(index + 1);
+            grid[row][col] = null;
+            rows[row][num] = columns[col][num] = boxes[boxIndex][num] = false;
+          }
+        }
+      }
+    
+      backtrack(0);
+      return solutions;
+    }
+
+    const removeCells = (unsolved, n) => {
+      while (n > 0) {
+        const row = Math.floor(Math.random() * 9);
+        const col = Math.floor(Math.random() * 9);
+
+        if (unsolved[row][col] === null) continue;
+
+        const temp = unsolved[row][col];
+
+        unsolved[row][col] = null;
+        console.log(solveSudoku(unsolved).length);
+
+        if (solveSudoku(unsolved).length > 1) {
+          console.log(solveSudoku(unsolved).length);
+          console.log("not unique");
+          unsolved[row][col] = temp;
+          continue;
+        }
+        n--;
+      }
+
+      return unsolved;
+    };
 
     solve(puzzle);
     setPuzzle(puzzle);
-    // remove some of the numbers to create the final puzzle.You can change the number of blank spaces by adjusting the number of iterations in the following line.
-    for (let i = 0; i < 50; i++) {
-      const x = Math.floor(Math.random() * 9);
-      const y = Math.floor(Math.random() * 9);
-      puzzle[x][y] = null;
-    }
+    // 55 seems to be the current limit for a decent timing
+    removeCells(puzzle, 55);
+    console.log(puzzle);
   }
-  function checkSolution(solution) {
-    console.log("solution:", solution);
-    // code to check the solution
-  }
-
 
   return (
     <div>
       <button className="button" onClick={generatePuzzle}>
         Generate Puzzle
       </button>
-      {/* {puzzle && <div>{puzzle}</div>} */}
       {puzzle ? <SudokuGrid puzzle={puzzle} /> : ""}
     </div>
   );
