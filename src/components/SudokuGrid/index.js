@@ -6,6 +6,7 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
   const [userSoulution, setUserSoulution] = useState([]);
   const [color, setColor] = useState("red");
   const [solved, setSolved] = useState(false);
+  const [showing, setShowing] = useState(false);
 
   useEffect(() => {
     setSolved(false);
@@ -104,11 +105,19 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
       return true;
     };
     // console.log(userSoulution);
-    // console.log(arraysAreEqual(solution, puzzle));
+    console.log(arraysAreEqual(solution, puzzle));
     if (arraysAreEqual(solution, puzzle)) {
       setGrid(solution);
       setSolved(true);
     }
+  };
+  const showSolution = () => {
+    setGrid(solution);
+    setShowing(true);
+  };
+  const backToPuzzle = () => {
+    setGrid(puzzle);
+    setShowing(false);
   };
   return (
     <>
@@ -146,6 +155,25 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
         <button className="button" id="verify" onClick={checkSolution}>
           Verify Sudoku
         </button>
+        {showing ? (
+          <button
+            className="button"
+            id="solution"
+            style={{ backgroundColor: color }}
+            onClick={backToPuzzle}
+          >
+            Back To Sudoku
+          </button>
+        ) : (
+          <button
+            className="button"
+            id="solution"
+            style={{ backgroundColor: color }}
+            onClick={showSolution}
+          >
+            See Solution
+          </button>
+        )}
       </div>
     </>
   );
