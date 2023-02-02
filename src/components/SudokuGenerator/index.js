@@ -111,7 +111,6 @@ export default function SudokuGenerator() {
         unsolved[row][col] = null;
         if (solveSudoku(unsolved).length > 1) {
           unsolved[row][col] = temp;
-          console.log("not unique");
           continue;
         }
         n--;
