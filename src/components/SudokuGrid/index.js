@@ -124,7 +124,7 @@ export default function SudokuGrid({ puzzle, difficulty, solution }) {
       <div className="grid-container" id="grid">
         {grid.map((row, rowIndex) =>
           row.map((value, columnIndex) => (
-            <div key={`${rowIndex}-${columnIndex}`} className="grid-cell">
+            <div key={`${rowIndex}-${columnIndex}`} className="grid-cell"  >
               {value === null ? (
                 <input
                   value=""
